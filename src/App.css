@@ -1,5 +1,22 @@
-.App {
+.flex-container {
+  margin: 10px;
   text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+h2 {
+  font-family: Monaco;
+  text-transform: uppercase;
+  padding: 0px 20px;
+  font-weight: 200;
+  color: #61dafb;
+}
+
+.flex-item {
+  margin: 30px;
+  border: 1px solid #282c34;
+  border-radius: 10px;
 }
 
 .App-logo {
