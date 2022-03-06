@@ -1,16 +1,20 @@
 import { useState } from "react";
 import classNames from "classnames";
+import { useSelector, useDispatch } from 'react-redux'
+import { State, ActionType } from '../store'
 
 export const ClickablePanel: React.FC<{name: string}> = ({name}) => {
-  const [isSelected, setState] = useState(false);
+  const selectedPanel = useSelector((state: State) => state.selected)
+  const dispatch = useDispatch()
+
   return (
     <div
       className={classNames("flex-item", {
-        selected: isSelected,
-        unselected: !isSelected,
+        selected: selectedPanel === name,
+        unselected: selectedPanel !== name,
       })}
       onClick={() => {
-        setState(true);
+        dispatch({type: ActionType.CLICK_PANEL, payload: name});
       }}
     >
       <h2>{name}</h2>
