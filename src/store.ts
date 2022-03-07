@@ -1,10 +1,7 @@
 import { createStore } from 'redux';
 
-export enum ActionType {
-  CLICK_PANEL = 'CLICK_PANEL'
-}
-
-type Panel = 'Monitoring' | 'Controls' | 'External'
+export type ActionType = 'CLICK_PANEL';
+type Panel = 'Monitoring' | 'Controls' | 'External';
 
 interface Action {
   type: ActionType;
@@ -16,7 +13,13 @@ export interface State {
 }
 
 const reducer = (state: State | undefined, action: Action): State => {
-  return { ...state, selected: action.payload};
-}
+  switch (action.type) {
+    case 'CLICK_PANEL':
+      return { ...state, selected: action.payload };
+    default:
+      return { ...state, selected: 'Controls' };
+  }
+};
 
-export const store = createStore(reducer, { selected: 'Controls' });
+export const store = createStore(reducer);
+console.log(store.getState());

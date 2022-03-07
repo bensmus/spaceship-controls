@@ -14,11 +14,10 @@ export const ClickablePanel: React.FC<{name: string}> = ({name}) => {
         unselected: selectedPanel !== name,
       })}
       onClick={() => {
-        dispatch({type: ActionType.CLICK_PANEL, payload: name});
+        dispatch({type: 'CLICK_PANEL', payload: name});
       }}
     >
       <h2>{name}</h2>
-      <canvas></canvas>
     </div>
   );
 }
