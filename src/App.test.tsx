@@ -28,16 +28,20 @@ test('starts up with controls panel selected', () => {
   expect(monitoringPanel).toHaveClass('unselected')
 })
 
-test('clicking on panel changes its class', () => {
-  expect(externalPanel).toHaveClass('unselected')
-  fireEvent(externalPanel, new MouseEvent('click'))
-  expect(externalPanel).toHaveClass('selected')
-
+test('clicking on already selected panel does not change its state', () => {
+  fireEvent.click(controlsPanel)
   expect(controlsPanel).toHaveClass('selected')
-  fireEvent(controlsPanel, new MouseEvent('click'))
-  expect(controlsPanel).toHaveClass('unselected')
+  expect(controlsPanel).not.toHaveClass('unselected')
+})
 
+test('clicking on panel makes it selected', () => {
+  fireEvent.click(externalPanel)
+  expect(externalPanel).toHaveClass('selected')
   expect(monitoringPanel).toHaveClass('unselected')
-  fireEvent(monitoringPanel, new MouseEvent('click'))
-  expect(monitoringPanel).toHaveClass('selected')
+  expect(controlsPanel).toHaveClass('unselected')
+  
+  fireEvent.click(controlsPanel)
+  expect(controlsPanel).toHaveClass('selected')
+  expect(externalPanel).toHaveClass('unselected')
+  expect(monitoringPanel).toHaveClass('unselected')
 })
